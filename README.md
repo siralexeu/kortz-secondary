@@ -1,43 +1,43 @@
 # The Kortz Center — Secondary Targets Tracker
 
-O pagină HTML de sine stătătoare (fără build, fără dependențe) pentru a explora și sorta lista de secondary targets din heist-ul **The Kortz Center** (GTA Online).
+A standalone HTML page (no build step, no dependencies) for exploring and sorting the secondary targets list from **The Kortz Center** heist (GTA Online).
 
-## Ce face
+## What it does
 
-- Afișează toate cele 65 de secondary targets, organizate pe categorii (Painting, Gemstone, Venus Statue, Fertility Statue, Skull Statue, Bracelet, Rings, Ornamental Egg, Necklace, Horse Statue, Crate, Meteorite).
-- **Căutare** live după nume sau categorie.
-- **Sortare** din dropdown sau prin click pe capul de coloană (min, max, step, weight, nume, categorie).
-- **Filtre pe categorie** — selecție unică (click pe un tab activează doar categoria respectivă; "All targets" resetează).
-- **Hard mode** — un toggle care adaugă automat 10% la toate sumele afișate.
-- **Preview de imagine** — la câteva rânduri (tablouri, statui, bijuterii), o iconiță de ochi arată o previzualizare la hover și o versiune full-screen la click (închidere prin click în afara imaginii sau tasta Escape).
-- **Deposit boxes** — secțiune separată cu distribuția de probabilități a plăților.
+- Displays all 65 secondary targets, organized by category (Painting, Gemstone, Venus Statue, Fertility Statue, Skull Statue, Bracelet, Rings, Ornamental Egg, Necklace, Horse Statue, Crate, Meteorite).
+- **Live search** by name or category.
+- **Sorting** via dropdown or by clicking a column header (min, max, step, weight, name, category).
+- **Category filters** — single-select tabs (clicking a tab activates only that category; clicking the active tab again deselects it and shows all targets; "All targets" resets).
+- **Hard mode** — a toggle that automatically adds 10% to all displayed amounts.
+- **Image preview** — on some rows (paintings, statues, jewelry), an eye icon shows a hover preview and a fullscreen version on click (closable by clicking outside the image or pressing Escape).
+- **Deposit boxes** — a separate section showing the payout probability distribution.
 
-## Sursa datelor
+## Data source
 
-Valorile de payout sunt preluate din tabelul comunității de pe [GTAWeb.eu](https://www.gtaweb.eu/) și reprezintă intervalul (min–max) pentru dificultatea **easy**, cu increment egal cu valoarea din coloana **Step**.
+Payout values come from the community-compiled table on [GTAWeb.eu](https://www.gtaweb.eu/) and represent the range (min–max) for **easy** difficulty, moving in increments equal to the value in the **Step** column.
 
-## Structura fișierului
+## File structure
 
-Totul stă într-un singur fișier: `kortz-center-secondary-targets.html`.
+Everything lives in a single file: `kortz-center-secondary-targets.html`.
 
-- **CSS** inline în `<style>` — temă vizuală GTA (paletă verde-bani/auriu/negru, fonturi Anton + Roboto Condensed).
-- **JavaScript** inline în `<script>`:
-  - `DATA` — array cu toate target-urile (tip, nume, min, max, step, weight, și opțional `img` — imaginea codată base64 pentru preview).
-  - `DEPOSIT` — array cu distribuția de payout pentru deposit boxes.
-  - Logica de randare, sortare, filtrare și lightbox.
-- Imaginile de preview sunt încorporate direct ca `data:image/jpeg;base64,...` — nu există fișiere externe, deci pagina funcționează offline și poate fi deschisă direct din orice browser.
+- **CSS** inline in `<style>` — GTA-style visual theme (money-green/gold/black palette, Anton + Roboto Condensed fonts).
+- **JavaScript** inline in `<script>`:
+  - `DATA` — array with all the targets (type, name, min, max, step, weight, and optionally `img` — the base64-encoded image for the preview).
+  - `DEPOSIT` — array with the payout distribution for deposit boxes.
+  - Rendering, sorting, filtering, and lightbox logic.
+- Preview images are embedded directly as `data:image/jpeg;base64,...` — there are no external files, so the page works offline and can be opened directly in any browser.
 
-## Cum îl folosești
+## How to use it
 
-Deschizi fișierul `.html` direct într-un browser (dublu-click) sau îl publici printr-un serviciu de hosting static (ex. GitHub Pages, Netlify, Vercel).
+Open the `.html` file directly in a browser (double-click), or publish it through a static hosting service (e.g. GitHub Pages, Netlify, Vercel).
 
-## Adăugarea unei imagini noi pentru un target
+## Adding a new image for a target
 
-1. Decupezi/convertești imaginea în JPEG.
-2. O encodezi în base64.
-3. Adaugi o linie `const IMG_NUME = "data:image/jpeg;base64,...";` înainte de array-ul `DATA`.
-4. Adaugi câmpul `img:IMG_NUME` la rândul corespunzător din `DATA`.
+1. Crop/convert the image to JPEG.
+2. Encode it in base64.
+3. Add a line `const IMG_NAME = "data:image/jpeg;base64,...";` before the `DATA` array.
+4. Add the `img:IMG_NAME` field to the corresponding row in `DATA`.
 
 ## Status
 
-Proiect activ — imagini adăugate progresiv pe măsură ce sunt disponibile capturi din joc pentru fiecare target.
+Active project — images are being added progressively as in-game captures become available for each target.
