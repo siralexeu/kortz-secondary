@@ -107,7 +107,7 @@
   /* ===== table ===== */
   .tablecard{max-width:1200px;margin:12px auto 0;padding:0 24px}
   .tableshell{background:var(--panel);border:1px solid var(--line);overflow-x:auto;width:fit-content;max-width:100%;margin:0 auto}
-  table{width:auto;border-collapse:collapse;min-width:620px}
+  table{width:auto;border-collapse:collapse;min-width:910px}
   thead th{
     background:#000;color:var(--dim);
     font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
@@ -130,7 +130,8 @@
   .cat .swatch{display:inline-block;width:7px;height:12px;margin-right:8px;vertical-align:-1px;background:var(--c,#666)}
   .cash{color:var(--money);font-weight:700;white-space:nowrap}
   .gold{color:var(--gold);font-weight:700;white-space:nowrap}
-  .step,.wt{color:var(--dim);font-size:13.5px}
+  .step,.wt{color:var(--dim);font-size:13.5px;text-align:center}
+  th[data-key="step"],th[data-key="weight"]{text-align:center}
   .name-cell{display:flex;align-items:center;gap:9px}
   .peek{
     position:relative;display:inline-flex;align-items:center;justify-content:center;
@@ -413,6 +414,16 @@ document.getElementById("hard").onchange=e=>{
   render();
 };
 
+function syncWidths(){
+  const shell = document.querySelector(".tableshell");
+  if(!shell) return;
+  const w = shell.getBoundingClientRect().width;
+  if(!w) return;
+  document.querySelectorAll(".banner-inner, .controlbar-inner, #tabs, #stats, .deposit, footer")
+    .forEach(el=>{ el.style.width = w+"px"; el.style.maxWidth = w+"px"; });
+}
+window.addEventListener("resize", ()=>requestAnimationFrame(syncWidths));
+
 function render(){
   const q=document.getElementById("q").value.trim().toLowerCase();
 
@@ -450,6 +461,8 @@ function render(){
       <td class="num wt">${d.weight}</td>`;
     tb.appendChild(tr);
   });
+
+  requestAnimationFrame(syncWidths);
 
   document.getElementById("empty").hidden = list.length>0;
 
