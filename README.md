@@ -6,4 +6,5 @@ The preview images also help you identify buyer requests, so you know exactly wh
 
 **Status:** active — images being added as in-game captures become available.
 
-**Credits:** Payout table data originally compiled by [PLTytus](https://x.com/PLTytus/status/2077761971420590478/photo/2).
+## Credits
+Payout table data originally compiled by [PLTytus](https://x.com/PLTytus/status/2077761971420590478/photo/2).
