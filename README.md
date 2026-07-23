@@ -5,3 +5,5 @@ A small tool for GTA Online players prepping for [The Kortz Center Heist](https:
 The preview images also help you identify buyer requests, so you know exactly which item you're looking for.
 
 **Status:** active — images being added as in-game captures become available.
+
+**Credits:** Payout table data originally compiled by PLTytus.
