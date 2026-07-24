@@ -16,6 +16,7 @@
     --dim:#9a9a9a;
     --money:#7fb832;
     --gold:#e5a52b;
+    --accent:#ee5d4f;
     --red:#c8412f;
     --line:#2e2e2e;
   }
@@ -38,7 +39,7 @@
   }
   .banner-inner{max-width:1200px;margin:0 auto}
   .tag{
-    display:inline-block;background:var(--money);color:#000;
+    display:inline-block;background:var(--accent);color:#000;
     font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
     padding:3px 9px;margin-bottom:10px;
   }
@@ -46,7 +47,7 @@
     font-family:'Anton',Impact,sans-serif;font-weight:400;
     font-size:clamp(20px,4.2vw,54px);line-height:1;letter-spacing:.005em;
     text-transform:uppercase;margin:0;white-space:nowrap;
-    text-shadow:3px 3px 0 var(--money);
+    text-shadow:3px 3px 0 var(--accent);
   }
 
   /* ===== controls bar ===== */
@@ -62,14 +63,14 @@
     border-bottom:2px solid var(--line);
   }
   .search input::placeholder{color:#6e6e6e}
-  .search input:focus{outline:none;border-bottom-color:var(--money);background:#292929}
+  .search input:focus{outline:none;border-bottom-color:var(--accent);background:#292929}
   .search svg{position:absolute;left:11px;top:13px;color:#6e6e6e}
   select{
     height:42px;padding:0 12px;border:0;border-bottom:2px solid var(--line);
     background:var(--panel-2);color:var(--ink);font-family:inherit;font-size:14px;
     text-transform:uppercase;letter-spacing:.04em;cursor:pointer;
   }
-  select:focus{outline:none;border-bottom-color:var(--money)}
+  select:focus{outline:none;border-bottom-color:var(--accent)}
   .toggle{
     display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 15px;cursor:pointer;
     background:var(--panel-2);border-bottom:2px solid var(--line);user-select:none;
@@ -79,7 +80,14 @@
   .led{width:10px;height:10px;background:#4a4a4a}
   .toggle.on{background:var(--red);border-bottom-color:#8f2b1e;color:#fff}
   .toggle.on .led{background:#ffdc4a}
-  .toggle:focus-within{outline:2px solid var(--money);outline-offset:-2px}
+  .toggle:focus-within{outline:2px solid var(--accent);outline-offset:-2px}
+  .infobtn{
+    display:inline-flex;align-items:center;height:42px;padding:0 15px;cursor:pointer;
+    background:var(--panel-2);border:none;border-bottom:2px solid var(--line);
+    font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+    font-family:inherit;
+  }
+  .infobtn:hover{color:var(--ink);border-bottom-color:var(--accent)}
 
   /* ===== type selector: pause-menu list ===== */
   .tabs{display:flex;flex-wrap:wrap;gap:4px;padding:24px 24px 4px;max-width:1200px;margin:0 auto}
@@ -92,9 +100,9 @@
   .tab:hover{background:var(--panel-2);color:var(--ink)}
   .tab .swatch{width:8px;height:14px;background:var(--c,#666)}
   .tab .count{color:#666;font-weight:400}
-  .tab[aria-checked="true"]{background:var(--ink);color:#000;border-bottom-color:var(--money)}
+  .tab[aria-checked="true"]{background:var(--ink);color:#000;border-bottom-color:var(--accent)}
   .tab[aria-checked="true"] .count{color:#555}
-  .tab:focus-visible{outline:2px solid var(--money);outline-offset:-2px}
+  .tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 
   /* ===== stats strip ===== */
   .stats{
@@ -112,10 +120,10 @@
     background:#000;color:var(--dim);
     font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
     text-align:left;padding:12px 22px;cursor:pointer;white-space:nowrap;
-    border-bottom:2px solid var(--money);
+    border-bottom:2px solid var(--accent);
   }
   thead th:hover{color:var(--ink)}
-  thead th.sorted{color:var(--money)}
+  thead th.sorted{color:var(--accent)}
   thead th .arrow{opacity:.3;margin-left:5px}
   thead th.sorted .arrow{opacity:1}
   th.num,td.num{text-align:right}
@@ -123,13 +131,13 @@
   tbody td{padding:11px 22px;border-bottom:1px solid var(--line);vertical-align:middle}
   tbody td:first-child{box-shadow:inset 3px 0 0 transparent}
   tbody tr:hover{background:#242424}
-  tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--money)}
+  tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
   tbody tr:hover .cat{color:#c9c9c9}
   .name{font-weight:700;letter-spacing:.01em}
   .cat{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
   .cat .swatch{display:inline-block;width:7px;height:12px;margin-right:8px;vertical-align:-1px;background:var(--c,#666)}
-  .cash{color:var(--money);font-weight:700;white-space:nowrap}
-  .gold{color:var(--gold);font-weight:700;white-space:nowrap}
+  .cash{color:var(--gold);font-weight:700;white-space:nowrap}
+  .gold{color:var(--red);font-weight:700;white-space:nowrap}
   .step,.wt{color:var(--dim);font-size:13.5px}
   td.num.step,td.num.wt{text-align:center}
   th.num[data-key="step"],th.num[data-key="weight"]{text-align:center}
@@ -140,10 +148,10 @@
     color:var(--dim);cursor:pointer;border-radius:0;
   }
   .peek svg{width:13px;height:13px}
-  .peek:hover,.peek:focus-visible{border-color:var(--money);color:var(--money);outline:none}
+  .peek:hover,.peek:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
   .peek .preview{
     display:none;position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);
-    z-index:50;background:#050505;border:2px solid var(--money);padding:6px;
+    z-index:50;background:#050505;border:2px solid var(--accent);padding:6px;
     box-shadow:0 12px 30px rgba(0,0,0,.6);
   }
   .peek .preview img{display:block;width:200px;height:auto}
@@ -166,7 +174,7 @@
   .lightbox.open{display:flex}
   .lightbox img{
     max-width:min(90vw,720px);max-height:85vh;width:auto;height:auto;
-    border:3px solid var(--money);box-shadow:0 20px 60px rgba(0,0,0,.7);
+    border:3px solid var(--accent);box-shadow:0 20px 60px rgba(0,0,0,.7);
   }
   .lightbox figcaption{
     position:absolute;bottom:28px;left:0;right:0;text-align:center;
@@ -177,7 +185,23 @@
     position:absolute;top:22px;right:26px;background:none;border:1px solid var(--line-strong);
     color:var(--bone-dim,var(--dim));width:36px;height:36px;font-size:20px;line-height:1;cursor:pointer;
   }
-  .lightbox .lb-close:hover{border-color:var(--money);color:var(--money)}
+  .lightbox .lb-close:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* heist info modal */
+  .info-modal{display:none;position:fixed;inset:0;z-index:200;background:rgba(6,6,6,.85);
+    align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+  .info-modal.open{display:flex}
+  .info-card{background:var(--panel);border:1px solid var(--line);width:100%;max-width:420px;cursor:auto}
+  .info-head{background:#000;color:var(--dim);font-weight:700;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;padding:12px 22px;display:flex;align-items:center;justify-content:space-between}
+  .info-close{background:none;border:none;color:var(--dim);font-size:16px;cursor:pointer;line-height:1;padding:0}
+  .info-close:hover{color:var(--accent)}
+  .info-list{width:100%}
+  .info-row{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:10px 22px;border-top:1px solid var(--line);font-size:12.5px;color:#c9c9c9;white-space:nowrap}
+  .info-row:first-child{border-top:none}
+  .info-row .label{color:var(--dim)}
+  .info-row .val{font-weight:600}
 
   .empty{padding:52px 20px;text-align:center;color:var(--dim)}
   .empty strong{display:block;font-family:'Anton',sans-serif;font-size:26px;
@@ -237,6 +261,7 @@
       <option value="type-asc">Category A → Z</option>
     </select>
     <label class="toggle" id="hardToggle"><input type="checkbox" id="hard"><span class="led"></span>Hard mode +10%</label>
+    <button type="button" class="infobtn" id="infoBtn">Heist info</button>
   </div>
 </div>
 
@@ -286,6 +311,20 @@
     <img id="lbImg" src="" alt="">
     <figcaption id="lbCaption"></figcaption>
   </figure>
+</div>
+
+<div class="info-modal" id="infoModal">
+  <div class="info-card">
+    <div class="info-head">Heist info <button class="info-close" id="infoClose" type="button" aria-label="Close">✕</button></div>
+    <div class="info-list">
+      <div class="info-row"><span class="label">Cooldown</span><span class="val">10 min</span></div>
+      <div class="info-row"><span class="label">Hard mode available</span><span class="val">48 min</span></div>
+      <div class="info-row"><span class="label">Elite challenge — normal</span><span class="val">$50 000</span></div>
+      <div class="info-row"><span class="label">Elite challenge — hard</span><span class="val">$100 000</span></div>
+      <div class="info-row"><span class="label">Buyer request bonus — normal</span><span class="val">$50 000</span></div>
+      <div class="info-row"><span class="label">Buyer request bonus — hard</span><span class="val">$100 000</span></div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -376,8 +415,8 @@ const DEPOSIT = [
 const COLORS = {
   "Painting":"#e5a52b","Crate":"#a9712f","Gemstone":"#3fa9d8","Venus Statue":"#a084c9",
   "Horse Statue":"#d4633f","Necklace":"#d2478c","Skull Statue":"#8b949b",
-  "Fertility Statue":"#d8cf35","Meteorite":"#6b7176","Ornamental Egg":"#7fb832",
-  "Bracelet":"#3f6fd4","Rings":"#5bbf8a",
+  "Fertility Statue":"#e0c93b","Meteorite":"#6b7176","Ornamental Egg":"#9c3b54",
+  "Bracelet":"#3f6fd4","Rings":"#d99a9a",
 };
 
 const TYPES = [...new Set(DATA.map(d=>d.type))].sort();
@@ -518,6 +557,14 @@ lightbox.addEventListener("click",()=>closeLightbox());
 document.getElementById("lbClose").addEventListener("click",e=>{ e.stopPropagation(); closeLightbox(); });
 lightbox.querySelector("figure").addEventListener("click",e=>e.stopPropagation());
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeLightbox(); });
+
+// ---- heist info modal ----
+const infoModal=document.getElementById("infoModal");
+document.getElementById("infoBtn").addEventListener("click",()=>infoModal.classList.add("open"));
+document.getElementById("infoClose").addEventListener("click",e=>{ e.stopPropagation(); infoModal.classList.remove("open"); });
+infoModal.addEventListener("click",()=>infoModal.classList.remove("open"));
+infoModal.querySelector(".info-card").addEventListener("click",e=>e.stopPropagation());
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") infoModal.classList.remove("open"); });
 
 </script>
 </body>
