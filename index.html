@@ -520,7 +520,7 @@ function render(){
 
   const best = list.length ? Math.max(...list.map(x=>x.max)) : 0;
   document.getElementById("stats").innerHTML =
-    `Showing <b>${list.length}</b> of ${DATA.length} targets · best payout on screen <b class="cash">$${fmt(adj(best))}</b> · difficulty <b>${hardOn()?"hard":"normal"}</b>`;
+    `Showing <b>${list.length}</b> of ${DATA.length} targets · difficulty <b>${hardOn()?"hard":"normal"}</b>`;
 
   const odds=document.getElementById("odds"); odds.innerHTML="";
   DEPOSIT.forEach(o=>{
