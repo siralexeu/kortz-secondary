@@ -130,8 +130,9 @@
   .cat .swatch{display:inline-block;width:7px;height:12px;margin-right:8px;vertical-align:-1px;background:var(--c,#666)}
   .cash{color:var(--money);font-weight:700;white-space:nowrap}
   .gold{color:var(--gold);font-weight:700;white-space:nowrap}
-  .step,.wt{color:var(--dim);font-size:13.5px;text-align:center}
-  th[data-key="step"],th[data-key="weight"]{text-align:center}
+  .step,.wt{color:var(--dim);font-size:13.5px}
+  td.num.step,td.num.wt{text-align:center}
+  th.num[data-key="step"],th.num[data-key="weight"]{text-align:center}
   .name-cell{display:flex;align-items:center;gap:9px}
   .peek{
     position:relative;display:inline-flex;align-items:center;justify-content:center;
@@ -184,19 +185,22 @@
 
   /* ===== deposit boxes ===== */
   .deposit{max-width:1200px;margin:26px auto 0;padding:0 24px}
-  .deposit-inner{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--gold);padding:20px 22px}
-  .deposit h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
-    font-size:26px;margin:0 0 4px;letter-spacing:.02em}
-  .deposit p{margin:0 0 16px;color:var(--dim);font-size:14px}
-  .odds{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}
-  .odd{background:var(--panel-2);padding:11px 12px;border-bottom:2px solid var(--line)}
-  .odd .amt{font-size:18px;font-weight:700;color:var(--money)}
-  .odd .pct{font-size:12px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
-  .odd .track{height:3px;background:#333;margin-top:9px}
-  .odd .track i{display:block;height:100%;background:var(--gold)}
+  .deposit-shell{background:var(--panel);border:1px solid var(--line);width:100%}
+  .deposit-head{background:#000;color:var(--dim);font-weight:700;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;white-space:nowrap}
+  .deposit-head .title{font-size:15px}
+  .deposit-head .sub{text-transform:none;font-weight:400;letter-spacing:0;color:var(--dim);opacity:.75;font-size:12px}
+  .deposit-head .notworth{text-transform:uppercase;font-weight:400;letter-spacing:.06em;color:#8a8a8a;font-size:12px;margin-left:8px}
+  .deposit-body{padding:14px 22px}
+  .deposit-body p{margin:0 0 10px;color:var(--dim);font-size:13px}
+  .odds{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;color:var(--dim)}
+  .odd .amt{color:#c9c9c9;font-weight:600;margin-right:5px}
+  .odd .pct{color:var(--dim)}
 
   footer{max-width:1200px;margin:30px auto 0;padding:16px 24px 0;color:#7a7a7a;
     font-size:12.5px;line-height:1.7;border-top:1px solid var(--line)}
+  footer a{color:#c9c9c9;text-decoration:none}
+  footer a:hover{text-decoration:underline}
 
   @media (max-width:680px){
     .banner{padding:20px 16px 16px}
@@ -260,16 +264,21 @@
 </div>
 
 <section class="deposit">
-  <div class="deposit-inner">
-    <h2>Deposit boxes</h2>
-    <p>Weight 30 · roughly 50 000 max in total. Every box that isn't empty pays out one of these:</p>
-    <div class="odds" id="odds"></div>
+  <div class="deposit-shell">
+    <div class="deposit-head"><span class="title">Deposit boxes</span> <span class="sub">inside the vault</span><span class="notworth">not worth</span></div>
+    <div class="deposit-body">
+      <p>Weight 30 · 50 000 max in total. Every box that isn't empty pays out one of these:</p>
+      <div class="odds" id="odds"></div>
+    </div>
   </div>
 </section>
 
 <footer>
-  Payout figures come from the community-compiled table on GTAWeb.eu. Each value lands somewhere between min and max, moving in increments of the step amount.
+  Built by <b>sir</b>. Payout table data originally compiled by <a href="https://x.com/PLTytus/status/2077761971420590478/photo/2" 
+  target="_blank" rel="noopener">PLTytus</a> on Twitter.
 </footer>
+
+
 
 <div class="lightbox" id="lightbox">
   <button class="lb-close" id="lbClose" type="button" aria-label="Close">✕</button>
@@ -388,7 +397,11 @@ function addTab(label, value, color, count){
   b.dataset.type=value;
   b.innerHTML = (color?`<span class="swatch" style="--c:${color}"></span>`:"") +
                 label + ` <span class="count">${count}</span>`;
-  b.onclick=()=>{ activeType = value; render(); };
+  b.onclick=()=>{
+    if(value==="ALL"){ activeType = "ALL"; }
+    else { activeType = (activeType===value) ? "ALL" : value; }
+    render();
+  };
   tabBox.appendChild(b);
 }
 addTab("All targets","ALL",null,DATA.length);
@@ -468,14 +481,12 @@ function render(){
 
   const best = list.length ? Math.max(...list.map(x=>x.max)) : 0;
   document.getElementById("stats").innerHTML =
-    `Showing <b>${list.length}</b> of ${DATA.length} targets · best payout on screen <b class="cash">$${fmt(adj(best))}</b> · difficulty <b>${hardOn()?"hard":"easy"}</b>`;
+    `Showing <b>${list.length}</b> of ${DATA.length} targets · best payout on screen <b class="cash">$${fmt(adj(best))}</b> · difficulty <b>${hardOn()?"hard":"normal"}</b>`;
 
   const odds=document.getElementById("odds"); odds.innerHTML="";
   DEPOSIT.forEach(o=>{
-    const el=document.createElement("div"); el.className="odd";
-    el.innerHTML=`<div class="amt">$${fmt(adj(o.amt))}</div>
-      <div class="pct">${o.pct}% chance</div>
-      <div class="track"><i style="width:${o.pct/35*100}%"></i></div>`;
+    const el=document.createElement("span"); el.className="odd";
+    el.innerHTML=`<span class="amt">$${fmt(adj(o.amt))}</span><span class="pct">${o.pct}%</span>`;
     odds.appendChild(el);
   });
 }
